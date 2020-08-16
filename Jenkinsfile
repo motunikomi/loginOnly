@@ -27,6 +27,7 @@ pipeline {
         }
       }
     }
+  }
   environment {
     resultPath = 'build/test-results/**/TEST-*.xml'
     jacocoReportDir = 'build/jacoco'
