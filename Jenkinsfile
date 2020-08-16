@@ -22,17 +22,11 @@ pipeline {
           }
           steps {
             sh './gradlew build check'
+            sh './gradlew sonarqube '
           }
         }
       }
     }
-
-    stage('deploy') {
-      steps {
-        build 'deploy-job'
-      }
-    }
-
   }
   environment {
     resultPath = 'build/test-results/**/TEST-*.xml'

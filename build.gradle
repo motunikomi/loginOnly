@@ -6,6 +6,7 @@ plugins {
 	id 'war'
 	id 'jacoco'
 	id 'checkstyle'
+	id "org.sonarqube" version "3.0"
 }
 
 group = 'com.login'
@@ -40,7 +41,14 @@ checkstyle {
     toolVersion '8.35'
 	configFile = file('./google_checks.xml')
 }
-
+sonarqube {
+  properties {
+    property "sonar.projectKey", "krtnstk_loginOnly"
+    property "sonar.organization", "kr"
+    property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.login", "81cbee6841e6b0a52e56107e7812f2a3af587e62"
+  }
+}
 pmd {
   ignoreFailures = true
   consoleOutput = true
