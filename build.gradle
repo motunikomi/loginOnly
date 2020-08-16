@@ -1,0 +1,79 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.15.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'pmd'
+	id 'war'
+	id 'jacoco'
+	id 'checkstyle'
+	id "org.sonarqube" version "3.0"
+	id "com.github.spotbugs" version "4.5.0"
+}
+
+group = 'com.login'
+//version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+bootWar {
+    baseName = 'login-dev'
+}
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-devtools'
+	implementation 'mysql:mysql-connector-java'
+	runtimeOnly 'com.h2database:h2'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+checkstyle {
+    ignoreFailures = true
+    toolVersion '8.35'
+	configFile = file('./google_checks.xml')
+}
+sonarqube {
+  properties {
+    property "sonar.projectKey", "krtnstk_loginOnly"
+    property "sonar.organization", "kr"
+    property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.login", "81cbee6841e6b0a52e56107e7812f2a3af587e62"
+  }
+}
+spotbugs {
+  ignoreFailures = true
+}
+pmd {
+  ignoreFailures = true
+  consoleOutput = true
+  ruleSets = [
+        'java-basic',            // good practices which should be followed
+        'java-braces',           // regarding the use and placement of braces
+        'java-clone',            // questionable usages of the clone() method
+        'java-codesize',         // problems related to code size or complexity
+        'java-design',           // flag suboptimal code implementations
+        'java-empty',            // empty statements of any kind
+        'java-finalizers',       // problems that can occur with finalizers
+        'java-imports',          // problems that can occur with import statements
+        'java-strictexception',  // strict guidelines about throwing and catching exceptions
+        'java-strings',          // manipulation of the String, StringBuffer, or StringBuilder instances
+        'java-sunsecure',        // check the security guidelines from Sun
+        'java-typeresolution',   // rules which resolve java Class files for comparison
+        'java-unnecessary',      // find useless or unnecessary code
+        'java-unusedcode'        // find unused or ineffective code
+  ]
+}
