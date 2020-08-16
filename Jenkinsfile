@@ -27,6 +27,10 @@ pipeline {
         }
       }
     }
+    stage('deploy') {
+      steps {
+        sh './gradlew bootWar'
+      }
   }
   environment {
     resultPath = 'build/test-results/**/TEST-*.xml'
