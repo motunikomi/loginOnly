@@ -29,7 +29,8 @@ pipeline {
     }
     stage('deploy') {
       steps {
-       sh "echo ${env.BRANCH_NAME}"
+       sh './gradlew bootWar'
+       sh 'echo ${env.BRANCH_NAME}'
       }
     }
   }
