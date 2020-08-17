@@ -4,7 +4,6 @@ pipeline {
     stage('clean'){
       steps {
         deleteDir()
-        sh "echo ${env.BRANCH_NAME}"
       }
     }
     stage('build') {
@@ -34,7 +33,9 @@ pipeline {
       }
     }
     stage('deploy') {
-
+      steps {
+       sh "echo ${env.BRANCH_NAME}"
+      }
     }
   }
   environment {
