@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('clean'){
-      steps {
-        deleteDir()
-      }
-    }
     stage('build') {
       steps {
         sh 'chmod +x ./gradlew'
