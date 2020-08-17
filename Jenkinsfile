@@ -33,7 +33,7 @@ pipeline {
         }
       }
     }
-    stage('test') {
+    stage('deploy') {
 
     }
   }
