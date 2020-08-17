@@ -1,6 +1,12 @@
 pipeline {
   agent any
   stages {
+    stage('clean'){
+      steps {
+        deleteDir()
+        sh "echo ${env.BRANCH_NAME}"
+      }
+    }
     stage('build') {
       steps {
         sh 'chmod +x ./gradlew'
@@ -26,6 +32,9 @@ pipeline {
           }
         }
       }
+    }
+    stage('test') {
+
     }
   }
   environment {
